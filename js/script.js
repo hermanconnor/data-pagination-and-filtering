@@ -3,22 +3,20 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-/***** FUNCTION TO CREATE & APPEND ELEMENTS, TO DISPLAY A PAGE OF NINE STUDENTS *****/
-
+/***** CREATE & APPEND ELEMENTS, TO DISPLAY A PAGE OF NINE STUDENTS *****/
 function showPage(list, page) {
   // Calculate the index for first and last student to display
   let startIndex = page * 9 - 9;
   let endIndex = page * 9;
 
   // Select the ul for the student list
-  let studentList = document.querySelector('.student-list');
+  const studentList = document.querySelector('.student-list');
   // Set ul to an empty string to clear it
   studentList.innerHTML = '';
 
   // Set the variable used to construct/append DOM elements
   let studentItem = '';
 
-  // Loop over the data
   for (let i = 0; i < list.length; i++) {
     let student = list[i];
     if (i >= startIndex && i < endIndex) {
@@ -41,8 +39,7 @@ function showPage(list, page) {
   }
 }
 
-/***** FUNCTION TO CREATE & APPEND PAGINATION BUTTONS *****/
-
+/***** CREATE & APPEND PAGINATION BUTTONS *****/
 function addPagination(list) {
   // Variable to calculate the number of pages needed
   const numOfPages = Math.ceil(list.length / 9);
@@ -88,14 +85,13 @@ function addPagination(list) {
 showPage(data, 1);
 addPagination(data);
 
-/***** FUNCTION TO CREATE & INSERT SEARCH BAR ON PAGE *****/
-
+/***** CREATE & INSERT SEARCH BAR ON PAGE *****/
 // Select the header element
 const header = document.querySelector('.header');
 
 function searchBar() {
   // Create the search bar elements
-  let searchForm = `<label for="search" class="student-search">
+  const searchForm = `<label for="search" class="student-search">
     <input id="search" placeholder="Search by name...">
     <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
   </label>`;
@@ -105,8 +101,7 @@ function searchBar() {
 }
 searchBar();
 
-/***** FUNTION TO SEARCH/FILTER NAMES THROUGH THE SEARCH BAR *****/
-
+/***** SEARCH/FILTER NAMES THROUGH THE SEARCH BAR *****/
 // Select the search input and button
 const filterInput = document.getElementById('search');
 const searchButton = document.querySelector('header [type="button"]');
@@ -117,11 +112,11 @@ searchButton.addEventListener('click', searchNames);
 
 function searchNames() {
   // Get value of input from search
-  const filterValue = filterInput.value.toLowerCase();
+  const query = filterInput.value.toLowerCase();
   // Filter the data
   const fullNames = data.filter(item => {
     const fullName = `${item.name.first} ${item.name.last}`;
-    return fullName.toLowerCase().includes(filterValue);
+    return fullName.toLowerCase().includes(query);
   });
 
   if (fullNames.length === 0) {
@@ -133,8 +128,7 @@ function searchNames() {
 }
 searchNames();
 
-/***** FUNCTION TO HANDLE NO MATCHES IN SEARCH *****/
-
+/***** HANDLE NO MATCHES IN SEARCH *****/
 function noResults() {
   // Get students ul and remove students if no match found
   const ul = document.querySelector('.student-list');
@@ -142,7 +136,7 @@ function noResults() {
 
   // Create no results message
   const text = `No Name Found`;
-  let noNamesFound = `<li>${text}</li>`;
+  const noNamesFound = `<li>${text}</li>`;
 
   // Get pagination ul and remove buttons if no match found
   const linkUL = document.querySelector('.link-list');
